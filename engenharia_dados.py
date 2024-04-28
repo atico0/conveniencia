@@ -1,3 +1,10 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import StandardScaler
+
+
 #dados ordinais
 def labelencoder(df, lista):
   for i in lista:

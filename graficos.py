@@ -1,6 +1,9 @@
 #gráficos
 
 import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
 
 def histogramas(df, colunas, forma, figsize= (20, 10)):
   num_cols = df.columns[colunas]
