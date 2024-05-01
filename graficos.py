@@ -37,3 +37,14 @@ def rainclouds(df, colunas, forma, figsize= (20, 10)):
   plt.tight_layout()
   plt.show()
 
+
+def barras(df, colunas, valor, forma, figsize= (20, 10), hue=None):
+  cols = df.columns[colunas]
+  fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
+
+  for col, ax in zip(cols, ax.flatten()):
+    sns.barplot(x=col, y=valor, hue=hue, data=df, palette="Paired")
+  plt.tight_layout()
+  plt.show()
+
+
