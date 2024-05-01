@@ -32,8 +32,8 @@ def padronizar(df, lista):
 def pega_tipos(df):
   numericos = {}
   categoricos = {}
-  for i in range(dados.shape[1]):
-    if str(dados.iloc[:,i].dtype) == "object":
+  for i in range(df.shape[1]):
+    if str(df.iloc[:,i].dtype) == "object":
       categoricos[i] = df.columns[i]
     else:
       numericos[i] = df.columns[i]
