@@ -48,3 +48,19 @@ def barras(df, colunas, valor, forma, figsize= (20, 10), hue=None):
   plt.show()
 
 
+def dispersoes(df, colunas, valor,
+               hue=None, style=None):
+  """
+  Gera vários gráficos de dispersão
+
+  df: Dataframe contendo as variáveis
+  colunas: lista de números com as colunas usadas no eixo x
+  valor: string contendo a coluna no eixo y
+  
+  """
+
+  cols = df.columns[colunas]
+
+  for col in cols:
+    sns.relplot(data=df, x=col, y=valor,
+                    hue=hue, style=style)
