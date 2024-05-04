@@ -15,7 +15,7 @@ def labelencoder(df, lista):
   lista: lista númerica de variáves
   """
   for i in lista:
-    df[:,i] = LabelEncoder().fit_transform(df.iloc[:,i])
+    df.iloc[:,i] = LabelEncoder().fit_transform(df.iloc[:,i])
   return(df)
 
 #dados nominais
@@ -26,8 +26,8 @@ def onehotencoder(df, lista):
   df: dataframe
   lista: lista númerica de variáves
   """
-
-  for i in lista:
+  cols = df.columns[lista]
+  for i in cols:
     novo = pd.get_dummies(df.loc[:, i], prefix=i).astype(int)
     df = pd.concat([df, novo], axis=1)
     df.drop([i], axis=1, inplace=True)
@@ -45,7 +45,7 @@ def padronizar(df, lista):
   lista: lista númerica de variáves
   """
   for i in lista:
-    df.loc[:,i] = StandardScaler().fit_transform(df.iloc[:,i].values.reshape(-1,1))
+    df.iloc[:,i] = StandardScaler().fit_transform(df.iloc[:,i].values.reshape(-1,1))
   return df
 
 #pega tipo das variáveis
