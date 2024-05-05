@@ -22,7 +22,7 @@ def treinar_todos(x, y, modelos, funcs_perda):
 
 
 
-def pcfacil(df, n_comp, variaveis=[], test=[]):
+def pcfacil(df, n_comp, variaveis=[]):
   """
   reliza uma PCA e retorna um dataframe com as componentes principais e
   retorna um df com os componentes principais e as variáveis não incluidas
@@ -56,9 +56,6 @@ def pcfacil(df, n_comp, variaveis=[], test=[]):
   df_pca = pd.DataFrame(df_pca, columns=lista_nomes)
   df_pca = pd.concat([df.iloc[:, lista_cat], df_pca], axis=1)
 
-  if len(test) != 0:
-    test_pca = pca.transform(test.iloc[:, lista_numericas])
-    test_pca = pd.DataFrame(test_pca, columns=lista_nomes)
-    df_pca = pd.concat([test.iloc[:, lista_cat], test_pca], axis=1)
-    return([df_pca, test, pca])
   return(df_pca, pca)
+
+
