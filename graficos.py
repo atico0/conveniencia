@@ -28,12 +28,12 @@ def boxplots(df, colunas, forma, figsize= (20, 10)):
 
 import ptitprince as pt
 
-def rainclouds(df, colunas, forma, figsize= (20, 10)):
+def rainclouds(df, colunas, x, forma, figsize= (20, 10)):
   cols = df.columns[colunas]
   fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
   for col, ax in zip(cols, ax.flatten()):
-    pt.RainCloud(data=df, y=col, orient="h", ax=ax)
+    pt.RainCloud(data=df, y=col, x=x, orient="h", ax=ax)
   plt.tight_layout()
   plt.show()
 
