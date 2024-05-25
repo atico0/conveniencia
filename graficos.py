@@ -28,7 +28,7 @@ def boxplots(df, colunas, forma, figsize= (20, 10)):
 
 import ptitprince as pt
 
-def rainclouds(df, colunas, x, forma, figsize= (20, 10)):
+def rainclouds(df, colunas, forma, figsize= (20, 10), x=None):
   cols = df.columns[colunas]
   fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
