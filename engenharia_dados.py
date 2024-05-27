@@ -19,7 +19,7 @@ def labelencoder(df, lista):
   return(df)
 
 #dados nominais
-def onehotencoder(df, lista):
+def onehotencoder(df, lista, drop_first=True):
   """
   realiza o one hot encoder num conjunto de variáveis num dataframe
 
@@ -28,7 +28,7 @@ def onehotencoder(df, lista):
   """
   cols = df.columns[lista]
   for i in cols:
-    novo = pd.get_dummies(df.loc[:, i], prefix=i).astype(int)
+    novo = pd.get_dummies(df.loc[:, i], prefix=i, drop_first=drop_first).astype(int)
     df = pd.concat([df, novo], axis=1)
     df.drop([i], axis=1, inplace=True)
   return df
