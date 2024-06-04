@@ -29,7 +29,7 @@ def desfaz_label(df, transformadores):
 
   for i in transformadores.keys():
     df.loc[:, i] = transformadores[i].inverse_transform(df.loc[:, i]).astype(int)
-
+    df.loc[:, i] = df[i].astype(int)
   return df
 
 
