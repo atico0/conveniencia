@@ -65,9 +65,9 @@ def desfaz_1onehote(df, var_org, valor_dropado="", prefix_sep="_"):
   lista_variaveis = []
   lista_valores = []
 
-    for j in df.columns:
-      if var_org in j:
-        lista_variaveis.append(j)
+  for j in df.columns:
+    if var_org in j:
+      lista_variaveis.append(j)
     
     for n in range(df.shape[0]):
       local = np.where(np.array(df.loc[n, lista_variaveis]) == 1)[0]
@@ -76,12 +76,9 @@ def desfaz_1onehote(df, var_org, valor_dropado="", prefix_sep="_"):
       else:
         lista_valores.append(valor_dropado)
         
-
   df[var_org] = lista_valores
   df.drop(lista_variaveis, axis=1, inplace=True)
   return df
-
-
 
 
 def desfaz_onehote(df, valores_dropados, prefix_sep="_", drop_first=True):
