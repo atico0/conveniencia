@@ -19,7 +19,7 @@ def labelencoder(df, lista):
   transformadores = {}
   for i in cols:
     transformador = LabelEncoder() 
-    df.loc[:,i] = transformador.fit_transform(df.loc[:,i])
+    df.loc[:,i] = transformador.fit_transform(df.loc[:,i]).astype(int)
     transformadores[i] = transformador
 
   return (df, transformadores)
