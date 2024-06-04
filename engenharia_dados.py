@@ -19,7 +19,7 @@ def labelencoder(df, lista):
   transformadores = {}
   for i in cols:
     transformador = LabelEncoder() 
-    df.loc[:,i] = transformador.fit_transform(df.loc[:,i]).astype(int)
+    df.loc[:,i] = transformador.fit_transform(df.loc[:,i])
     transformadores[i] = transformador
 
   return (df, transformadores)
@@ -28,7 +28,7 @@ def desfaz_label(df, transformadores):
   
 
   for i in transformadores.keys():
-    df.loc[:, i] = transformadores[i].inverse_transform(df.loc[:, i])
+    df.loc[:, i] = transformadores[i].inverse_transform(df.loc[:, i]).astype(int)
 
   return df
 
