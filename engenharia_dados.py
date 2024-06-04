@@ -63,7 +63,7 @@ def onehotencoder(df, lista, prefix_sep="_", drop_first=True):
 
 def desfaz_1onehote(df, var_org, valor_dropado="", prefix_sep="_"):
   lista_variaveis = []
-    lista_valores = []
+  lista_valores = []
 
     for j in df.columns:
       if var_org in j:
