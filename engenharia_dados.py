@@ -60,7 +60,9 @@ def onehotencoder(df, lista, prefix_sep="_", drop_first=True):
 
 
 
-def desfaz_1onehote(df, var_org, valor_dropado="", prefix_sep="_"):
+def desfaz_1onehote(dados, var_org, valor_dropado="", prefix_sep="_"):
+
+  df = dados.copy()
   lista_variaveis = []
   lista_valores = []
 
