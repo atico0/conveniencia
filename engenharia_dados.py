@@ -77,6 +77,7 @@ def desfaz_1onehote(df, var_org, valor_dropado="", prefix_sep="_"):
         
   df[var_org] = lista_valores
   df.drop(lista_variaveis, axis=1, inplace=True)
+  print(lista_variaveis)
   return df
 
 
