@@ -72,7 +72,7 @@ def desfaz_1onehote(dados, var_org, valor_dropado="", prefix_sep="_"):
     
   for n in df.index:
     local = np.where(df.loc[n, lista_variaveis] == 1)[0]
-    if local:
+    if local.size > 0:
       lista_valores.append((lista_variaveis[local[0]]).replace(var_org+prefix_sep,""))
     else:
       lista_valores.append(valor_dropado)
