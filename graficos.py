@@ -38,17 +38,28 @@ def rainclouds(df, colunas, forma, figsize= (20, 10), x=None):
   plt.show()
 
 
-def barras(df, colunas, valor, forma, figsize= (20, 10), hue=None):
+def barras_x(df, colunas, y, forma, figsize= (20, 10), hue=None):
   cols = df.columns[colunas]
   fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
   for col, ax in zip(cols, ax.flatten()):
-    sns.barplot(x=col, y=valor, hue=hue, data=df, palette="Paired")
+    sns.barplot(x=col, y=y, hue=hue, data=df, palette="Paired")
   plt.tight_layout()
   plt.show()
 
 
-def dispersoes(df, colunas, valor,
+def barras_y(df, colunas, x, forma, figsize= (20, 10), hue=None):
+  cols = df.columns[colunas]
+  fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
+
+  for col, ax in zip(cols, ax.flatten()):
+    sns.barplot(x=x, y=col, hue=hue, data=df, palette="Paired")
+  plt.tight_layout()
+  plt.show()
+
+
+
+def dispersoes(df, colunas, y,
                hue=None, style=None):
   """
   Gera vários gráficos de dispersão
@@ -62,5 +73,5 @@ def dispersoes(df, colunas, valor,
   cols = df.columns[colunas]
 
   for col in cols:
-    sns.relplot(data=df, x=col, y=valor,
+    sns.relplot(data=df, x=col, y=y,
                     hue=hue, style=style)
