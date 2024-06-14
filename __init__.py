@@ -1,8 +1,9 @@
-__all__ = ["engenharia_dados", "graficos", "modelagem"]
+__all__ = ["eng_dados", "graficos", "modelagem"]
 
 
-from .engenharia_dados import labelencoder, onehotencoder, padronizar, pega_tipos
+from .engenharia_dados import labelencoder, desfaz_label, onehotencoder
+from .engenharia_dados import desfaz_1onehote, desfaz_onehote, padronizar, pega_tipos
 
-from .graficos import histogramas, boxplots, rainclouds
+from .graficos import histogramas, boxplots, rainclouds, barras_x, barras_y, dispersoes 
 
-from .modelagem import treinar_todos
+from .modelagem import treinar_todos, pcfacil
