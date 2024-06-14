@@ -1,5 +1,5 @@
 from sklearn.model_selection import train_test_split
-from eng_dados import pega_tipos
+from conveniencia.eng_dados import pega_tipos
 import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
