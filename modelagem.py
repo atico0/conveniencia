@@ -1,7 +1,10 @@
 from sklearn.model_selection import train_test_split
+from eng_dados import pega_tipos
 import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+
 
 
 #modelos
@@ -94,6 +97,8 @@ def pcfacil(df, n_comp, variaveis=[]):
   # Criando data frame com os componentes e as demais variáveis
   df_pca = pd.DataFrame(df_pca, columns=lista_nomes)
   df_pca = pd.concat([df.iloc[:, lista_cat], df_pca], axis=1)
+
+  plt.plot(pca.explained_variance_ratio_)
 
   return(df_pca, pca)
 
