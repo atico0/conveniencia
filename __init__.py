@@ -1,7 +1,8 @@
 __all__ = ["eng_dados", "graficos", "modelagem", "financas"]
 
 
-from .eng_dados import labelencoder, desfaz_label, onehotencoder, desfaz_1onehote, desfaz_onehote, padronizar, pega_tipos
+from .eng_dados import labelencoder, desfaz_label, onehotencoder
+from .eng_dados import desfaz_1onehote, desfaz_onehote, padronizar, pega_tipos
 
 from .graficos import histogramas, boxplots, rainclouds, barras_x, barras_y, dispersoes 
 
