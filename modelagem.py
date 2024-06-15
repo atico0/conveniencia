@@ -53,15 +53,17 @@ def treinar_todos(x, y, modelos, funcs_perda, test_size, plot=True):
 
 
 
-def pcfacil(df, n_comp, variaveis=[]):
+def pcfacil(dados, n_comp, colunas=[], numerica=True):
   """
   reliza uma PCA e retorna um dataframe com as componentes principais e
   retorna um df com os componentes principais e as variáveis não incluidas
 
   df: dataframe em que será realizado o PCA
   n_comp: inteiro, quantidade de componentes
-  variáveis: lista de variáveis para serem incluidas no PCA 
+  colunas: lista númerica representando as coordenadas das variáveis ou strings com os nomes delas
   (caso nada seja imputado, usa a função pega_tipos)
+  numerica: Booleano indicando se a lista de variáveis é numerica ou strings
+  
   test: dataframe, dataframe de teste para caso o argumento df seja o dataframe de treino
 
   Returns:
@@ -74,20 +76,30 @@ def pcfacil(df, n_comp, variaveis=[]):
 
   # checando se foram passadas variáveis para o PCA ou se devo usar a função pega_tipos
   # para escolher quais variáveis vão ser usadas no PCA
-  if len(variaveis)==0:
+
+  df = dados.copy()
+
+  if len(colunas)==0:
     cat, numericas = pega_tipos(df)
     lista_cat = list(cat.keys())
     lista_numericas = list(numericas.keys())
+
   else:
-    lista_numericas = variaveis
+
+    if numerica:
+      lista_numericas = df.columns[colunas]
+    else:
+      lista_numericas = colunas
+
     lista_cat = []
+
     for j in range(df.shape[1]):
-      if j not in lista_numericas:
-        lista_cat.append(j)
+      if df.columns[j] not in lista_numericas:
+        lista_cat.append(df.columns[j])
 
   # Fazeno o PCA
   pca = PCA(n_components=n_comp)
-  df_pca = pca.fit_transform(df.iloc[:, lista_numericas])
+  df_pca = pca.fit_transform(df.loc[:, lista_numericas])
   lista_nomes = []
 
   #Atribuindo nomes os componentes
@@ -96,7 +108,7 @@ def pcfacil(df, n_comp, variaveis=[]):
 
   # Criando data frame com os componentes e as demais variáveis
   df_pca = pd.DataFrame(df_pca, columns=lista_nomes)
-  df_pca = pd.concat([df.iloc[:, lista_cat], df_pca], axis=1)
+  df_pca = pd.concat([df.loc[:, lista_cat], df_pca], axis=1)
 
   plt.plot(pca.explained_variance_ratio_)
 

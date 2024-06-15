@@ -6,15 +6,21 @@ from sklearn.decomposition import PCA
 
 
 #dados ordinais
-def label(df, lista):
+def label(dados, colunas, numerica=True):
   """
   realiza o label encoder num conjunto de variáveis num dataframe
 
   df: dataframe
-  lista: lista númerica de variáves
+  colunas: lista númerica representando as coordenadas das variáveis ou strings com os nomes delas
+  numerica: Booleano indicando se a lista de variáveis é numerica ou strings
   """
+  df = dados.copy()
 
-  cols = df.columns[lista]
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
+
   transformadores = {}
   for i in cols:
     transformador = LabelEncoder() 
@@ -34,12 +40,13 @@ def desfaz_label(df, transformadores):
 
 #dados nominais
 
-def onehote(dados, lista, prefix_sep="_", drop_first=True):
+def onehote(dados, colunas, numerica=True, prefix_sep="_", drop_first=True):
   """
   realiza o one hot encoder num conjunto de variáveis num dataframe
 
   dados: dataframe
-  lista: lista númerica de variáves
+  colunas: lista númerica representando as coordenadas das variáveis ou strings com os nomes delas
+  numerica: Booleano indicando se a lista de variáveis é numerica ou strings
   prefix_sep: string usada no get_dummies
   drop_first: Booleano para dizer se alguma coluna vai ser apagada no processo
 
@@ -52,7 +59,12 @@ def onehote(dados, lista, prefix_sep="_", drop_first=True):
   """
 
   df = dados.copy()
-  cols = df.columns[lista]
+  
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
+
   valores_dropados = {}
   for i in cols:
     novo = pd.get_dummies(df.loc[:, i], prefix=i,
@@ -109,16 +121,23 @@ def desfaz_onehote(dados, valores_dropados, prefix_sep="_"):
 
 #dados quantitativos
 from sklearn.preprocessing import StandardScaler
-def padronizar(df, lista):
+def padronizar(df, colunas, numerica=True):
   """
   realiza a padrinização num conjunto de variáveis num dataframe
 
   df: dataframe
-  lista: lista númerica de variáves
+  colunas: lista númerica representando as coordenadas das variáveis ou strings com os nomes delas
+  numerica: Booleano indicando se a lista de variáveis é numerica ou strings
   """
   df = dados.copy()
-  for i in lista:
-    df.iloc[:,i] = StandardScaler().fit_transform(df.iloc[:,i].values.reshape(-1,1))
+  
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
+
+  for i in cols:
+    df.loc[:,i] = StandardScaler().fit_transform(df.loc[:,i].values.reshape(-1,1))
   return df
 
 #pega tipo das variáveis
@@ -139,7 +158,6 @@ def pega_tipos(df):
       numericos[i] = df.columns[i]
 
   return (categoricos, numericos)
-
 
 
 

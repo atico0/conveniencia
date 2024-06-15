@@ -5,13 +5,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-def histogramas(df, colunas, forma, figsize= (20, 10)):
+def histogramas(df, colunas, numerica=True, forma=(1,1), figsize= (20,10)):
   """
   Plota vários histogramas de uma vez
 
   df: Dataframe contendo as variáveis a serem plotadas
 
-  colunas: lista númerica representando as coordenadas das variáveis
+  colunas: lista númerica representando as coordenadas das variáveis ou strings com os nomes delas
+  numerica: Booleano indicando se o paramêtro colunas é numerico ou strings
 
   forma: tupla numérica representando a quantidade de linhas e colunas dos histogramas
 
@@ -20,24 +21,29 @@ def histogramas(df, colunas, forma, figsize= (20, 10)):
   returns:
   Nda
   """
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
 
-  num_cols = df.columns[colunas]
+
   fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
-  for col, ax in zip(num_cols, ax.flatten()):
+  for col, ax in zip(cols, ax.flatten()):
     sns.histplot(df[col], ax=ax, kde=True)
 
   plt.tight_layout()
   plt.show()
 
 
-def boxplots(df, colunas, forma, figsize= (20, 10)):
+def boxplots(df, colunas, numerica=True, forma=(1,1), figsize= (20, 10)):
   """
   Plota vários boxplots de uma vez
 
   df: Dataframe contendo as variáveis a serem plotadas
 
-  colunas: lista númerica representando as coordenadas das variáveis
+  colunas: lista númerica representando as coordenadas das variáveis ou strings com os nomes delas
+  numerica: Booleano indicando se o paramêtro colunas é numerico ou strings
 
   forma: tupla numérica representando a quantidade de linhas e colunas dos plots
 
@@ -47,7 +53,11 @@ def boxplots(df, colunas, forma, figsize= (20, 10)):
   Nda
   
   """
-  cols = df.columns[colunas]
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
+
   fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
   for col, ax in zip(cols, ax.flatten()):
@@ -58,14 +68,15 @@ def boxplots(df, colunas, forma, figsize= (20, 10)):
 
 import ptitprince as pt
 
-def rainclouds(df, colunas, forma, figsize= (20, 10), x=None, orient="h"):
+def rainclouds(df, colunas, numerica=True, forma=(1,1), figsize= (20, 10), x=None, orient="h"):
   
   """
   Plota vários rainclouds de uma vez]
 
   df: Dataframe contendo as variáveis a serem plotadas
 
-  colunas: lista númerica representando as coordenadas das variáveis
+  colunas: lista númerica representando as coordenadas das variáveis ou strings com os nomes delas
+  numerica: Booleano indicando se o paramêtro colunas é numerico ou strings
 
   forma: tupla numérica representando a quantidade de linhas e colunas dos plots
 
@@ -76,7 +87,11 @@ def rainclouds(df, colunas, forma, figsize= (20, 10), x=None, orient="h"):
   returns:
   Nda
   """
-  cols = df.columns[colunas]
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
+
   fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
   for col, ax in zip(cols, ax.flatten()):
@@ -85,13 +100,15 @@ def rainclouds(df, colunas, forma, figsize= (20, 10), x=None, orient="h"):
   plt.show()
 
 
-def barras_x(df, colunas, y, forma, figsize= (20, 10), hue=None):
+def barras_x(df, colunas, numerica=True, y, forma, figsize= (20, 10), hue=None):
   """
   Plota várias barras de uma vez alterando o eixo X
   
   df: Dataframe contendo as variáveis a serem plotadas
 
   colunas: lista númerica representando as coordenadas das variáveis (eixos dos x)
+  ou strings com os nomes delas
+  numerica: Booleano indicando se o paramêtro colunas é numerico ou strings
 
   y: string representando a variável do eixo y das barras
 
@@ -103,7 +120,11 @@ def barras_x(df, colunas, y, forma, figsize= (20, 10), hue=None):
   Nda
   """
 
-  cols = df.columns[colunas]
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
+
   fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
   for col, ax in zip(cols, ax.flatten()):
@@ -112,13 +133,15 @@ def barras_x(df, colunas, y, forma, figsize= (20, 10), hue=None):
   plt.show()
 
 
-def barras_y(df, colunas, x, forma, figsize= (20, 10), hue=None):
+def barras_y(df, colunas, numerica=True, x, forma, figsize= (20, 10), hue=None):
   """
   Plota várias barras de uma vez alterando o eixo Y
   
   df: Dataframe contendo as variáveis a serem plotadas
 
   colunas: lista númerica representando as coordenadas das variáveis (eixos dos y)
+  ou strings com os nomes delas
+  numerica: Booleano indicando se o paramêtro colunas é numerico ou strings
 
   x: string representando a variável do eixo x das barras
 
@@ -129,7 +152,11 @@ def barras_y(df, colunas, x, forma, figsize= (20, 10), hue=None):
   returns:
   Nda
   """
-  cols = df.columns[colunas]
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
+
   fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
   for col, ax in zip(cols, ax.flatten()):
@@ -139,19 +166,29 @@ def barras_y(df, colunas, x, forma, figsize= (20, 10), hue=None):
 
 
 
-def dispersoes(df, colunas, y,
-               hue=None, style=None):
+def dispersoes(df, colunas, numerica=True, y, hue=None, style=None):
   """
   Gera vários gráficos de dispersão
 
   df: Dataframe contendo as variáveis
-  colunas: lista de números com as colunas usadas no eixo x
+
+  colunas: lista númerica representando as coordenadas das variáveis (eixos dos x)
+  ou strings com os nomes delas
+  numerica: Booleano indicando se o paramêtro colunas é numerico ou strings
+
   valor: string contendo a coluna no eixo y
   
   """
 
-  cols = df.columns[colunas]
+  if numerica:
+    cols = df.columns[colunas]
+  else:
+    cols = colunas
 
   for col in cols:
     sns.relplot(data=df, x=col, y=y,
                     hue=hue, style=style)
+
+
+
+
