@@ -1,13 +1,12 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 
 #dados ordinais
-def labelencoder(df, lista):
+def label(df, lista):
   """
   realiza o label encoder num conjunto de variáveis num dataframe
 
@@ -35,13 +34,24 @@ def desfaz_label(df, transformadores):
 
 #dados nominais
 
-def onehotencoder(df, lista, prefix_sep="_", drop_first=True):
+def onehote(dados, lista, prefix_sep="_", drop_first=True):
   """
   realiza o one hot encoder num conjunto de variáveis num dataframe
 
-  df: dataframe
+  dados: dataframe
   lista: lista númerica de variáves
+  prefix_sep: string usada no get_dummies
+  drop_first: Booleano para dizer se alguma coluna vai ser apagada no processo
+
+  Return:
+  um dataframe com as variáveis originais mais as variáveis novas do encoding mas sem as variáveis
+  usadas no processo  de encoding. Um dicionário contendo os nomes das variáveis apagas no processo
+  como chaves e a categoria cuja coluna foi apagada como valor (usar na função desfaz_onehote)
+
+
   """
+
+  df = dados.copy()
   cols = df.columns[lista]
   valores_dropados = {}
   for i in cols:
@@ -65,18 +75,20 @@ def onehotencoder(df, lista, prefix_sep="_", drop_first=True):
 def desfaz_1onehote(dados, var_org, valor_dropado="", prefix_sep="_"):
 
   df = dados.copy()
+  #checando quais variáveis do dataframe original vão ser usadas
   lista_variaveis = []
   lista_valores = []
-
   for j in df.columns:
     if var_org+prefix_sep in j:
       lista_variaveis.append(j)
-    
+  
+  #percorrendo as linhas do dataframe e checando em qual coluna está o valor 1
   for n in df.index:
     local = np.where(df.loc[n, lista_variaveis] == 1)[0]
     if local.size > 0:
       lista_valores.append((lista_variaveis[local[0]]).replace(var_org+prefix_sep,""))
     else:
+      #adicionando o valor dropado caso nenhua das colunas possua o valor 1
       lista_valores.append(valor_dropado)
         
   df[var_org] = lista_valores
@@ -85,8 +97,9 @@ def desfaz_1onehote(dados, var_org, valor_dropado="", prefix_sep="_"):
   return df
 
 
-def desfaz_onehote(df, valores_dropados, prefix_sep="_"):
-
+def desfaz_onehote(dados, valores_dropados, prefix_sep="_"):
+  
+  df = dados.copy()
   for i in valores_dropados.keys():
     df = desfaz_1onehote(df, i, valores_dropados[i], prefix_sep)
   return df
@@ -103,6 +116,7 @@ def padronizar(df, lista):
   df: dataframe
   lista: lista númerica de variáves
   """
+  df = dados.copy()
   for i in lista:
     df.iloc[:,i] = StandardScaler().fit_transform(df.iloc[:,i].values.reshape(-1,1))
   return df
