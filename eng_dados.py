@@ -54,6 +54,8 @@ def onehotencoder(df, lista, prefix_sep="_", drop_first=True):
     if drop_first:
       valores_dropados[i] = novo.columns[0].replace(i+prefix_sep,"")
       novo = novo.iloc[:, 1:]
+    else:
+      valores_dropados[i] = ""
     df = pd.concat([df, novo], axis=1)
     df.drop([i], axis=1, inplace=True)
   return (df, valores_dropados)
@@ -67,7 +69,7 @@ def desfaz_1onehote(dados, var_org, valor_dropado="", prefix_sep="_"):
   lista_valores = []
 
   for j in df.columns:
-    if var_org in j:
+    if var_org+prefix_sep in j:
       lista_variaveis.append(j)
     
   for n in df.index:
