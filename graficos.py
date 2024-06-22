@@ -100,7 +100,7 @@ def rainclouds(df, colunas, numerica=True, forma=(1,1), figsize= (20, 10), x=Non
   plt.show()
 
 
-def barras_x(df, colunas, numerica=True, y, forma, figsize= (20, 10), hue=None):
+def barras_x(df, colunas, y, numerica=True, forma=(1,1), figsize=(20, 10), hue=None):
   """
   Plota várias barras de uma vez alterando o eixo X
   
@@ -133,7 +133,7 @@ def barras_x(df, colunas, numerica=True, y, forma, figsize= (20, 10), hue=None):
   plt.show()
 
 
-def barras_y(df, colunas, numerica=True, x, forma, figsize= (20, 10), hue=None):
+def barras_y(df, colunas, x, numerica=True, forma=(1,1), figsize= (20, 10), hue=None):
   """
   Plota várias barras de uma vez alterando o eixo Y
   
@@ -166,7 +166,7 @@ def barras_y(df, colunas, numerica=True, x, forma, figsize= (20, 10), hue=None):
 
 
 
-def dispersoes(df, colunas, numerica=True, y, hue=None, style=None):
+def dispersoes(df, colunas, y, numerica=True, hue=None, style=None):
   """
   Gera vários gráficos de dispersão
 
