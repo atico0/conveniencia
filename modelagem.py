@@ -1,5 +1,6 @@
 from sklearn.model_selection import train_test_split
 from conveniencia.eng_dados import pega_tipos
+from conveniencia import graficos
 import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
@@ -44,10 +45,11 @@ def treinar_todos(x, y, modelos, funcs_perda, test_size, plot=True):
   metricas.index = list(funcs_perda.keys())
 
   metricas = metricas.transpose()
-  metricas_semindex = metricas.reset_index()
-  quant_colunas = metricas_semindex.shape[1]
   if plot:
-    barras_y(metricas_semindex, list(1, range(quant_colunas)), "index" (1,quant_colunas-1))
+    metricas_semindex = metricas.reset_index()
+    quant_colunas = metricas_semindex.shape[1]
+    colunas = list(funcs_perda.keys())
+    graficos.barras_y(metricas_semindex, colunas, "index" (1,quant_colunas-1))
 
   return metricas
 
