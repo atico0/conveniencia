@@ -161,3 +161,9 @@ def pega_tipos(df):
 
 
 
+def nulo(df):
+  nulos = df.isnull()
+  prop = nulos.sum() / df.shape[0]
+  print(prop)
+  sns.heatmap(nulos)
+  return (nulos, prop)
