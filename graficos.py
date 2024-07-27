@@ -192,3 +192,11 @@ def dispersoes(df, colunas, y, numerica=True, hue=None, style=None):
 
 
 
+def correlacoes(df, annot=True):
+  numerics = df.select_dtypes(include="number").columns
+  corr = df[numerics].corr()
+  mask = np.zeros_like(corr)
+  mask[np.triu_indices_from(mask)] = True
+  sns.heatmap(corr, mask=mask, annot=annot)
+  plt.show()
+  return corr
