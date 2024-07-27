@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -161,7 +162,7 @@ def pega_tipos(df):
 
 
 
-def nulo(df):
+def nulos(df):
   nulos = df.isnull()
   prop = nulos.sum() / df.shape[0]
   print(prop)
