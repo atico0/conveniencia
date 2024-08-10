@@ -200,3 +200,17 @@ def correlacoes(df, annot=True):
   sns.heatmap(corr, mask=mask, annot=annot)
   plt.show()
   return corr
+
+
+def plot_outliers(X, y_pred, title, valor_norm=1, valor_out=-1,
+                 label_norm='Normal', label_out='Outliers',
+                 cor_norm="blue", cor_out="red"):
+    plt.scatter(X[y_pred == valor_norm, 0], X[y_pred == valor_norm, 1],
+                c=cor_norm, label=label_norm)
+    plt.scatter(X[y_pred == valor_out, 0], X[y_pred == valor_out, 1],
+                c=cor_out, label=label_out)
+    plt.title(title)
+    plt.legend()
+    plt.show()
+
+
