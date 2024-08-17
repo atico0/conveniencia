@@ -117,3 +117,6 @@ def pcfacil(dados, n_comp, colunas=[], numerica=True):
   return(df_pca, pca)
 
 
+
+
+

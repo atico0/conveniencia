@@ -168,3 +168,22 @@ def nulos(df):
   print(prop)
   sns.heatmap(nulos)
   return (nulos, prop)
+
+
+def replace_outliers_multi(df, columns, inf=0.1, sup=0.9):
+    dados = df.copy()
+    for column in columns:
+        # Calcular estatísticas para identificação de outliers
+
+        quantil_inf =  dados[column].quantile(inf)
+        quantil_sup =  dados[column].quantile(sup)
+        # Identificar outliers
+        outliers_inf = (dados[column] < quantil_inf)
+        outliers_sup = (dados[column] > quantil_sup)
+
+
+        # Substituir outliers pelo percentil 90
+        dados.loc[outliers_inf, column] = quantil_inf
+        dados.loc[outliers_sup, column] = quantil_sup
+
+    return dados
