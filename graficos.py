@@ -66,9 +66,11 @@ def boxplots(df, colunas, numerica=True, forma=(1,1), figsize= (20, 10)):
   plt.tight_layout()
   plt.show()
 
-import ptitprince as pt
+#import ptitprince as pt TÁ DANDO PROBLEMA DE VERSÃO !!!!!
 
-def rainclouds(df, colunas, numerica=True, forma=(1,1), figsize= (20, 10), x=None, orient="h"):
+def rainclouds():
+  print("não está funcionando")
+#def rainclouds(df, colunas, numerica=True, forma=(1,1), figsize= (20, 10), x=None, orient="h"):
   
   """
   Plota vários rainclouds de uma vez]
@@ -87,17 +89,17 @@ def rainclouds(df, colunas, numerica=True, forma=(1,1), figsize= (20, 10), x=Non
   returns:
   Nda
   """
-  if numerica:
-    cols = df.columns[colunas]
-  else:
-    cols = colunas
+ # if numerica:
+  #  cols = df.columns[colunas]
+  #else:
+   # cols = colunas
 
-  fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
+  #fig, ax = plt.subplots(forma[0], forma[1], figsize=figsize)
 
-  for col, ax in zip(cols, ax.flatten()):
-    pt.RainCloud(data=df, y=col, x=x, orient=orient, ax=ax)
-  plt.tight_layout()
-  plt.show()
+  #for col, ax in zip(cols, ax.flatten()):
+    #pt.RainCloud(data=df, y=col, x=x, orient=orient, ax=ax)
+  #plt.tight_layout()
+  #plt.show()
 
 
 def barras_x(df, colunas, y, forma, numerica=True, figsize= (20, 10), hue=None):
